@@ -1,7 +1,10 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+@MappedSuperclass
 @Entity
 public class Job{
 
@@ -9,6 +12,8 @@ public class Job{
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Size(min=3, max=50)
     private String name;
 
     private String employer;
