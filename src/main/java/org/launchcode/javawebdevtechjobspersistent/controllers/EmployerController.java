@@ -14,6 +14,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("employers")
 public class EmployerController {
+
     @Autowired
     private EmployerRespository employerRespository;
 
@@ -30,7 +31,7 @@ public class EmployerController {
         if (errors.hasErrors()) {
             return "employers/add";
         }
-
+        employerRespository.save(newEmployer);
         return "redirect:";
     }
 
@@ -43,6 +44,7 @@ public class EmployerController {
             model.addAttribute("employer", employer);
             return "employers/view";
         } else {
+            employerRespository.findById(employerId);
             return "redirect:../";
         }
     }
