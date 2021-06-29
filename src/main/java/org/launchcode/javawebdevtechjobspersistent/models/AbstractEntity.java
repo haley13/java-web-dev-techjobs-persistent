@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @MappedSuperclass
-@Entity
 public abstract class AbstractEntity {
 
     @Id

@@ -1,7 +1,7 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Employer;
-import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRespository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,14 @@ import java.util.Optional;
 public class EmployerController {
 
     @Autowired
-    private EmployerRespository employerRespository;
+    private EmployerRepository employerRepository;
+
+    @GetMapping
+    public String displayAllEmployers (Model model) {
+        model.addAttribute("title", "All Employers");
+        model.addAttribute("employers", employerRepository.findAll());
+        return "employers/index";
+    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -29,9 +36,11 @@ public class EmployerController {
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Employer");
             return "employers/add";
         }
-        employerRespository.save(newEmployer);
+
+        employerRepository.save(newEmployer);
         return "redirect:";
     }
 
@@ -44,17 +53,9 @@ public class EmployerController {
             model.addAttribute("employer", employer);
             return "employers/view";
         } else {
-            employerRespository.findById(employerId);
+            employerRepository.findById(employerId);
             return "redirect:../";
         }
     }
 
-    @GetMapping()
-    public String displayListofEmployers(Model model) {
-
-        model.addAttribute(new Employer());
-        model.addAttribute("employers", employerRespository);
-
-        return "redirect:";
-    }
 }
