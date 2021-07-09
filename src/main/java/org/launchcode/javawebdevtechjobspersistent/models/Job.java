@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -13,9 +14,10 @@ public class Job extends AbstractEntity {
     @NotNull(message="Category is required.")
     private Employer employer;
 
-    private String skills;
+    @ManyToMany
+    private List<Skill> skills;
 
-    public Job(Employer employer, String skills) {
+    public Job(Employer employer, List<Skill> skills) {
         super();
         this.employer = employer;
         this.skills = skills;
@@ -35,11 +37,11 @@ public class Job extends AbstractEntity {
         this.employer = employer;
     }
 
-    public String getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 }

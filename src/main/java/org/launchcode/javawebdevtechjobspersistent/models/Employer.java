@@ -15,16 +15,20 @@ public class Employer extends AbstractEntity {
     @NotBlank
     private String location;
 
-    //@JoinColumn
+    //@JoinColumn(name="employer_id")
     @OneToMany(mappedBy = "employer")
     @NotNull(message="Category is required.")
-    private final List<Job> jobs= new ArrayList<>();
+    private List<Job> jobs= new ArrayList<>();
 
     public Employer() {
     }
 
     public List<Job> getJobs() {
         return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 
     public String getLocation() {

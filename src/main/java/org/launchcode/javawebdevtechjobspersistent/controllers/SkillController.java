@@ -21,7 +21,7 @@ public class SkillController {
     @GetMapping
     public String index (Model model) {
         model.addAttribute("title", "All Skills");
-        model.addAttribute("skill", skillRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
 
@@ -55,7 +55,6 @@ public class SkillController {
             model.addAttribute("skill", skill);
             return "skills/view";
         } else {
-            //skillRepository.findById(skillId);
             return "redirect:../";
         }
     }
