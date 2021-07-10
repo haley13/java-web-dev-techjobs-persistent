@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Skill extends AbstractEntity {
 
-    @Size(min=10, max=200, message="Description is too short or too long.")
+    @Size(min=1, max=200, message="Description is too short or too long.")
     private String description;
 
     @ManyToMany(mappedBy = "skills")
@@ -24,5 +24,9 @@ public class Skill extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
     }
 }
