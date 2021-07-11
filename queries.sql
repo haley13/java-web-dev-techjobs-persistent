@@ -15,3 +15,7 @@ WHERE (location= "St. Louis City");
 DROP TABLE job
 
 ## Part 4: Test it with SQL
+SELECT skill.name, skill.description
+FROM skill
+WHERE skill.name IS NOT NULL
+ORDER BY skill.name ASC;
